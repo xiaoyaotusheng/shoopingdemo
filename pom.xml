@@ -65,11 +65,17 @@
         <version>2.7.0</version>
     </dependency>
 
-    <dependency>
+        <dependency>
+          <groupId>org.apache.poi</groupId>
+           <artifactId>poi</artifactId>
+           <version>RELEASE</version>
+        </dependency>
+
+        <dependency>
         <groupId>org.apache.poi</groupId>
         <artifactId>poi-ooxml</artifactId>
-        <version>3.9</version>
-    </dependency>
+            <version>RELEASE</version>
+     </dependency>
 
     <dependency>
         <groupId>commons-fileupload</groupId>
