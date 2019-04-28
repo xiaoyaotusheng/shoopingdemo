@@ -14,8 +14,9 @@ import java.util.Map;
 
 import com.google.common.collect.Maps;
 import org.apache.poi.EncryptedDocumentException;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 import org.apache.poi.ss.usermodel.BorderStyle;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -26,11 +27,15 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.Workbook;//接口， 兼容性强 20003,2007都要实现
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.ss.usermodel.CellType;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook; //只支持2007以前的老版本，2003
+
+import org.apache.poi.xssf.usermodel.XSSFWorkbook; //只支持2007及其以后版本
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+
 
 
 /**
@@ -40,13 +45,13 @@ import org.apache.poi.ss.usermodel.CellType;
 public class ExcelUtil {
     /********************************************************************************
      *  操作jar包对应信息和Excel表的名称对应
-     *  HSSFWorkbook/Workbook                       工作簿
-     *  HSSFSheet                                   工作表
-     *  HSSFRow                                     行
-     * HSSFCell                                     单元格
-     * HSSFFont                                     字体
-     * HSSFName                                     名称
-     * HSSFDataFormat                               日期格式
+     *  HSSFWorkbook/XSSFWorkbook/Workbook                       工作簿
+     *  HSSF Sheet/Sheet                             工作表
+     *  HSSF Row                                     行
+     * HSSF Cell                                     单元格
+     * HSSF Font                                     字体
+     * HSSF Name                                     名称
+     * HSSF DataFormat                               日期格式
      * HSSFHeader                                   表头
      * HSSFFooter                                   表尾
      * HSSFCellStyle                               单元格样式设计
@@ -411,11 +416,12 @@ public class ExcelUtil {
     }
 
     /**
+     * Excle 文件拷贝
      * 将源文件的内容复制到新Excel文件(可供理解Excel使用,使用价值不大)
      * @param srcFilepath 源文件全路径
      * @param desFilepath 目标文件全路径
      */
-    public static void writeExcel(String srcFilepath, String desFilepath)
+    public static void copyExcel(String srcFilepath, String desFilepath)
             throws IOException, EncryptedDocumentException, InvalidFormatException {
         FileOutputStream outputStream = null;
         String suffiex = getSuffiex(desFilepath);
@@ -471,6 +477,7 @@ public class ExcelUtil {
             }
         }
     }
+
 
     public static void main(String[] args) {
 
