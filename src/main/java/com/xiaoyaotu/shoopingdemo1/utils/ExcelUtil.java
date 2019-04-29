@@ -228,9 +228,9 @@ public class ExcelUtil {
     /**
      * 创建Excel文件
      * @param filepath filepath 文件全路径
-     * @param sheetName 新Sheet页的名字
-     * @param titles 表头
-     * @param values 每行的单元格
+     * @param sheetName 新Sheet页的名字  表名
+     * @param titles 表头           表头第一行显示的中文
+     * @param values 每行的单元格   每个单元格的值--需要写入的信息 所有行
      */
     public static boolean writeExcel(String filepath, String sheetName, List<String> titles,
                                      List<Map<String, Object>> values) throws IOException {
@@ -273,12 +273,12 @@ public class ExcelUtil {
                 titleOrder.put(title, i);
             }
             // 写入正文
-            Iterator<Map<String, Object>> iterator = values.iterator();
+            Iterator<Map<String, Object>> iterator = values.iterator(); //转换下
             // 行号
-            int index = 1;
+            int index = 1; //从第二行开始写入，因为是从0开始计算第一行的
             while (iterator.hasNext()) {
-                row = sheet.createRow(index);
-                Map<String, Object> value = iterator.next();
+                row = sheet.createRow(index); //行号
+                Map<String, Object> value = iterator.next(); //获取一行数据
                 for (Map.Entry<String, Object> map : value.entrySet()) {
                     // 获取列名
                     String title = map.getKey();
@@ -293,7 +293,7 @@ public class ExcelUtil {
                         cell.setCellStyle(styles.get("cellB"));
                     }
                     // 获取列的值
-                    Object object = map.getValue();
+                    Object object = map.getValue();//实体类的属性
                     // 判断object的类型
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     if (object instanceof Double) {
@@ -307,7 +307,9 @@ public class ExcelUtil {
                         cell.setCellValue(time);
                     } else if (object instanceof Boolean) {
                         cell.setCellValue((Boolean) object);
-                    } else {
+                    } else if (object instanceof Integer){
+                        cell.setCellValue ((Integer) object);
+                    }else {
                         if (object != null) {
                             cell.setCellValue(object.toString());
                         }
