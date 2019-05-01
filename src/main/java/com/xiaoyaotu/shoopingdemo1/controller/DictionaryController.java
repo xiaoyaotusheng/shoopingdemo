@@ -56,8 +56,8 @@ public class DictionaryController {
                      return ApiResult.FAILURE("字典已存在！！");
                  } else {
                      DictionaryEntity entity = new DictionaryEntity();
-                     entity.setZdmc(zdmc);
-                     entity.setZddm(zddm);
+                     entity.setZdzwm(zdmc);
+                     entity.setZdywm(zddm);
                      entity.setZdlx(zdlx);
                      DictionaryEntity saveEntity = idictionaryService.save(entity);
                      if (!(saveEntity == null)) {
@@ -93,8 +93,8 @@ public class DictionaryController {
                 if (idictionaryService.existsById(id)) {
                         DictionaryEntity oldEntity = idictionaryService.findById(id);
                         DictionaryEntity newEntity = new DictionaryEntity();
-                        newEntity.setZddm(zddm);
-                        newEntity.setZdmc(zdmc);
+                        newEntity.setZdzwm(zddm);
+                        newEntity.setZdywm(zdmc);
                         newEntity.setId(id);
                         DictionaryEntity entity2 = idictionaryService.update(newEntity, oldEntity);
                         idictionarylistService.updateDictxx(zdmc, zddm, id);
@@ -125,8 +125,8 @@ public class DictionaryController {
        ){
              try{
                   DictionaryEntity entity=new DictionaryEntity();
-                           entity.setZdmc(zdmc);
-                           entity.setZddm(zddm);
+                           entity.setZdzwm(zdmc);
+                           entity.setZdywm(zddm);
                            entity.setZxbz(zxbz);
                            entity.setZdlx(zdlx);
                  List<DictionaryEntity> entityList= idictionaryService.findZdxxByEntity(entity);
