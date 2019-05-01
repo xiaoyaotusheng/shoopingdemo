@@ -94,7 +94,7 @@ public class DictionaryServiceImpl implements IdictionaryService  {
     @Override
     public DictionaryEntity findZdxxByZdmc(String zdmc) {
         DictionaryEntity entity=new DictionaryEntity();
-                         entity.setZdmc(zdmc);
+                         entity.setZdzwm(zdmc);
         List<DictionaryEntity> list = queryByEntity(entity, true);
             if(list.size()==0) {
                 return null;
@@ -106,7 +106,7 @@ public class DictionaryServiceImpl implements IdictionaryService  {
     @Override
     public DictionaryEntity findZdxxByZddm(String zddm) {
         DictionaryEntity entity=new DictionaryEntity();
-                         entity.setZddm(zddm);
+                         entity.setZdywm(zddm);
         List<DictionaryEntity> list = queryByEntity(entity, true);
         if(list.size()==0) {
             return null;
@@ -143,11 +143,11 @@ public class DictionaryServiceImpl implements IdictionaryService  {
 
     private  DictionaryEntity informationCompletionForEntity( DictionaryEntity oldEntity,DictionaryEntity newEntity){
 
-        if (StringUtil.isNull(newEntity.getZdmc())) {
-            newEntity.setZdmc(oldEntity.getZdmc());
+        if (StringUtil.isNull(newEntity.getZdzwm())) {
+            newEntity.setZdzwm(oldEntity.getZdzwm());
         }
-        if (StringUtil.isNull(newEntity.getZddm())) {
-            newEntity.setZddm(oldEntity.getZddm());
+        if (StringUtil.isNull(newEntity.getZdywm())) {
+            newEntity.setZdywm(oldEntity.getZdywm());
         }
         if(StringUtil.isNull(newEntity.getZdlx())){
             newEntity.setZdlx(oldEntity.getZdlx());
@@ -179,11 +179,11 @@ public class DictionaryServiceImpl implements IdictionaryService  {
             public Predicate toPredicate(Root<DictionaryEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
                 List<Predicate> predicates=new ArrayList<>();
-                if(StringUtil.isNotNull(entity.getZdmc())){
-                    predicates.add(cb.equal(root.get("zdmc"),entity.getZdmc()));
+                if(StringUtil.isNotNull(entity.getZdzwm())){
+                    predicates.add(cb.equal(root.get("zdmc"),entity.getZdzwm()));
                 }
-                if(StringUtil.isNotNull(entity.getZddm())){
-                    predicates.add(cb.equal(root.get("zddm"),entity.getZddm()));
+                if(StringUtil.isNotNull(entity.getZdywm())){
+                    predicates.add(cb.equal(root.get("zddm"),entity.getZdywm()));
                 }
                 if(StringUtil.isNotNull(entity.getZxbz())){
                     predicates.add(cb.equal(root.get("zxbz"),entity.getZxbz()));

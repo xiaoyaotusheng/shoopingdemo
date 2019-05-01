@@ -94,14 +94,14 @@ public class DictionarylistServiceImpl implements IdictionarylistService{
     @Override
     public List<DictionarylistEntity> findCtxxByZdmc(String zdmc) {
         DictionarylistEntity entity=new DictionarylistEntity();
-                       entity.setZdmc(zdmc);
+                       entity.setZdzwm(zdmc);
         return queryByEntity(entity,true);
     }
 
     @Override
     public List<DictionarylistEntity> findCtxxByZddm(String zddm) {
         DictionarylistEntity entity=new DictionarylistEntity();
-                  entity.setZddm(zddm);
+                  entity.setZdywm(zddm);
         return queryByEntity(entity,true);
     }
 
@@ -162,8 +162,8 @@ public class DictionarylistServiceImpl implements IdictionarylistService{
     //设置默认值
     private DictionarylistEntity defortPramsSet(DictionarylistEntity entity){
         DictionaryEntity  dict=dictionaryRepository.findById(entity.getZdid()).get();
-                    entity.setZdmc(dict.getZdmc());
-                    entity.setZddm(dict.getZddm());
+                    entity.setZdzwm(dict.getZdzwm());
+                    entity.setZdywm(dict.getZdywm());
                     entity.setCtlx(dict.getZdlx()); //词条类型适合字典类型绑定的
                     entity.setZxbz("0");
 
@@ -172,11 +172,11 @@ public class DictionarylistServiceImpl implements IdictionarylistService{
 
     private  DictionarylistEntity informationCompletionForEntity( DictionarylistEntity oldEntity,DictionarylistEntity newEntity){
         //能够更新的信息传递过来做判断就行了
-        if (StringUtil.isNotNull(newEntity.getZdmc())) {
-            oldEntity.setZdmc(newEntity.getZdmc());
+        if (StringUtil.isNotNull(newEntity.getZdzwm())) {
+            oldEntity.setZdzwm(newEntity.getZdzwm());
         }
-        if (StringUtil.isNotNull(newEntity.getZddm())) {
-            oldEntity.setZddm(newEntity.getZddm());
+        if (StringUtil.isNotNull(newEntity.getZdywm())) {
+            oldEntity.setZdywm(newEntity.getZdywm());
         }
         if(0!=newEntity.getZdid()){
             oldEntity.setZdid(newEntity.getZdid());
@@ -201,11 +201,11 @@ public class DictionarylistServiceImpl implements IdictionarylistService{
             public Predicate toPredicate(Root<DictionarylistEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 
                 List<Predicate> predicates=new ArrayList<>();
-                if(StringUtil.isNotNull(entity.getZdmc())){
-                    predicates.add(cb.like(root.get("zdmc"),entity.getZdmc()));
+                if(StringUtil.isNotNull(entity.getZdzwm())){
+                    predicates.add(cb.like(root.get("zdmc"),entity.getZdzwm()));
                 }
-                if(StringUtil.isNotNull(entity.getZddm())){
-                    predicates.add(cb.like(root.get("zddm"),entity.getZddm()));
+                if(StringUtil.isNotNull(entity.getZdywm())){
+                    predicates.add(cb.like(root.get("zddm"),entity.getZdywm()));
                 }
                 if(StringUtil.isNotNull(entity.getZxbz())){
                     predicates.add(cb.equal(root.get("zxbz"),entity.getZxbz()));
