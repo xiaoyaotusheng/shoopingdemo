@@ -83,9 +83,9 @@ public class ExcelExportComtroller {
                 names=ExcelUtil.OFFICE_EXCEL_XLSX;
             }
             EmplPictureInforEntity entity=new EmplPictureInforEntity();
-               entity.setZjid(fileVo.getZjid());
-               entity.setXxgzjlid(fileVo.getXxgzjlid());
-               entity.setYgId(fileVo.getYgid());
+               entity.setZjzj(fileVo.getZjid());
+               entity.setGzxxjlzj(fileVo.getXxgzjlid());
+               entity.setYgzj(fileVo.getYgid());
             List<EmplPictureInforEntity> list = iemplPictureInforService.findAll(entity);
             sheetName="员工的对应图片信息";//表名
             filepash=sheetName+ DateUtils.getStringByDateForDay4(new Date()) +"."+names; //文件路径
@@ -138,8 +138,8 @@ public class ExcelExportComtroller {
         for (Field f : object.getClass().getDeclaredFields()) {
             f.setAccessible(true);
             for(ParamstypemsEntity param :params){
-                if(f.getName().equals(param.getSxywm())){
-                    sxzwm.add(param.getSxzwm());
+                if(f.getName().equals(param.getSxm())){
+                    sxzwm.add(param.getSxzwzs());
                 }
             }
         }
@@ -152,8 +152,8 @@ public class ExcelExportComtroller {
         for (Field f : object.getClass().getDeclaredFields()) {//记录存值
             f.setAccessible(true);
             for (ParamstypemsEntity param : params) {
-                if (f.getName().equals(param.getSxywm())) {
-                    map.put(param.getSxzwm(), f.get(object)); //中文名做Key
+                if (f.getName().equals(param.getSxm())) {
+                    map.put(param.getSxzwzs(), f.get(object)); //中文名做Key
                 }
             }
         }
