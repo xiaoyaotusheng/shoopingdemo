@@ -61,13 +61,13 @@ public class EmplPictureInforCotroller {
              FileUtil.uploadFile(path,filename,file); //文件信息保存
            //同步存数据库信息
              EmplPictureInforEntity entity=new EmplPictureInforEntity();
-                  entity.setYgId(fileVo.getYgid());
-                  entity.setXxgzjlid(fileVo.getXxgzjlid());
-                  entity.setZjid(fileVo.getZjid());
+                  entity.setYgzj(fileVo.getYgid());
+                  entity.setGzxxjlzj(fileVo.getXxgzjlid());
+                  entity.setZjzj(fileVo.getZjid());
                   entity.setBz(fileVo.getBz());
                   entity.setTpcjsj(scsj);
-                  entity.setTpgxsj(scsj);
-                  entity.setTpdz("upload/"+filename);
+                  entity.setTpcjsj(scsj);
+                  entity.setTplj("upload/"+filename);
                   entity.setTpmc(filename);
                   entity=iemplPictureInforService.save(entity);
              return  ApiResult.SUCCESS(entity);
@@ -106,13 +106,13 @@ public class EmplPictureInforCotroller {
                       FileUtil.uploadFile(path,filename,file); //文件信息保存
                       //同步存数据库信息
                       EmplPictureInforEntity entity=new EmplPictureInforEntity();
-                      entity.setYgId(fileVo.getYgid());
-                      entity.setXxgzjlid(fileVo.getXxgzjlid());
-                      entity.setZjid(fileVo.getZjid());
+                      entity.setYgzj(fileVo.getYgid());
+                      entity.setGzxxjlzj(fileVo.getXxgzjlid());
+                      entity.setZjzj(fileVo.getZjid());
                       entity.setBz(fileVo.getBz());
                       entity.setTpcjsj(scsj);
-                      entity.setTpgxsj(scsj);
-                      entity.setTpdz("upload/"+filename);
+                      entity.setTpcjsj(scsj);
+                      entity.setTplj("upload/"+filename);
                       entity.setTpmc(filename);
                       entity=iemplPictureInforService.save(entity);
                       list.add(entity);
@@ -232,7 +232,7 @@ public class EmplPictureInforCotroller {
              if (iemplPictureInforService.existsById(id)) {
                 //先删除图片信息文件
                  EmplPictureInforEntity entity =iemplPictureInforService.findByid(id);
-                 File   file=new File(entity.getTpdz());
+                 File   file=new File(entity.getTplj());
                    file.delete();
                    //再删除数据库里的信息
                    iemplPictureInforService.deleteByid(id);

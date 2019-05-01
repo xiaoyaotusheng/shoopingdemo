@@ -75,7 +75,7 @@ public class EmplPictureInforServiceImpl implements IemplPictureInforService {
     @Override
     public Page<EmplPictureInforEntity> findByZjId(int zjid, int page, int pagesize) throws Exception {
         EmplPictureInforEntity entity =new EmplPictureInforEntity();
-                 entity.setZjid(zjid);
+                 entity.setZjzj(zjid);
 
         return queryPageByEntity(entity,page,pagesize,true);
     }
@@ -83,7 +83,7 @@ public class EmplPictureInforServiceImpl implements IemplPictureInforService {
     @Override
     public Page<EmplPictureInforEntity> findByXxgzjlId(int xxgzjlid, int page, int pagesize) throws Exception {
         EmplPictureInforEntity entity =new EmplPictureInforEntity();
-                 entity.setXxgzjlid(xxgzjlid);
+                 entity.setGzxxjlzj(xxgzjlid);
 
         return queryPageByEntity(entity,page,pagesize,true);
     }
@@ -91,7 +91,7 @@ public class EmplPictureInforServiceImpl implements IemplPictureInforService {
     @Override
     public Page<EmplPictureInforEntity> findByYgId(int ygid, int page, int pagesize) throws Exception {
         EmplPictureInforEntity entity =new EmplPictureInforEntity();
-         entity.setYgId(ygid);
+         entity.setYgzj(ygid);
 
         return queryPageByEntity(entity,page,pagesize,true);
     }
@@ -99,21 +99,21 @@ public class EmplPictureInforServiceImpl implements IemplPictureInforService {
     @Override
     public List<EmplPictureInforEntity> findByZjId(int zjid) throws Exception {
         EmplPictureInforEntity entity =new EmplPictureInforEntity();
-        entity.setZjid(zjid);
+        entity.setZjzj(zjid);
         return queryByEntity(entity,true);
     }
 
     @Override
     public List<EmplPictureInforEntity> findByXxgzjlId(int xxgzjlid) throws Exception {
         EmplPictureInforEntity entity =new EmplPictureInforEntity();
-        entity.setXxgzjlid(xxgzjlid);
+        entity.setGzxxjlzj(xxgzjlid);
         return queryByEntity(entity,true);
     }
 
     @Override
     public List<EmplPictureInforEntity> findByYgId(int ygid) throws Exception {
         EmplPictureInforEntity entity =new EmplPictureInforEntity();
-        entity.setYgId(ygid);
+        entity.setYgzj(ygid);
         return queryByEntity(entity,true);
     }
 
@@ -125,14 +125,14 @@ public class EmplPictureInforServiceImpl implements IemplPictureInforService {
 
 
     private List<EmplPictureInforEntity> queryByEntity(EmplPictureInforEntity entity, boolean isSort) throws Exception {
-        if(entity.getYgId()==0){
-            entity.setYgId(0);
+        if(entity.getYgzj()==0){
+            entity.setYgzj(0);
         }
-        if(entity.getXxgzjlid()==0){
-            entity.setXxgzjlid(0);
+        if(entity.getGzxxjlzj()==0){
+            entity.setGzxxjlzj(0);
         }
-        if(entity.getZjid()==0){
-            entity.setZjid(0);
+        if(entity.getZjzj()==0){
+            entity.setZjzj(0);
         }
         Specification querySpecifi = queryParams(entity);
 
@@ -152,14 +152,14 @@ public class EmplPictureInforServiceImpl implements IemplPictureInforService {
             @Override
             public Predicate toPredicate(Root<EmplPictureInforEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>();
-                if( 0!=entity.getYgId()){
-                    predicates.add(cb.equal(root.get("ygId"),entity.getYgId()));
+                if( 0!=entity.getYgzj()){
+                    predicates.add(cb.equal(root.get("ygId"),entity.getYgzj()));
                 }
-                if( 0!=entity.getXxgzjlid()){
-                    predicates.add(cb.equal(root.get("xxgzjlid"),entity.getXxgzjlid()));
+                if( 0!=entity.getGzxxjlzj()){
+                    predicates.add(cb.equal(root.get("xxgzjlid"),entity.getGzxxjlzj()));
                 }
-                if( 0!=entity.getZjid()){
-                    predicates.add(cb.equal(root.get("zjid"),entity.getZjid()));
+                if( 0!=entity.getZjzj()){
+                    predicates.add(cb.equal(root.get("zjid"),entity.getZjzj()));
                 }
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }
@@ -168,14 +168,14 @@ public class EmplPictureInforServiceImpl implements IemplPictureInforService {
     }
 
     private Page<EmplPictureInforEntity> queryPageByEntity(EmplPictureInforEntity entity, int page, int pagesize, boolean isSort) throws Exception {
-                if(entity.getYgId()==0){
-                    entity.setYgId(0);
+                if(entity.getYgzj()==0){
+                    entity.setYgzj(0);
                 }
-                if(entity.getXxgzjlid()==0){
-                    entity.setXxgzjlid(0);
+                if(entity.getGzxxjlzj()==0){
+                    entity.setGzxxjlzj(0);
                 }
-                if(entity.getZjid()==0){
-                    entity.setZjid(0);
+                if(entity.getZjzj()==0){
+                    entity.setZjzj(0);
                 }
         Specification querySpecifi = queryParams(entity);
         Page<EmplPictureInforEntity> list = null;

@@ -64,8 +64,8 @@ public class DictWorkController {
     private void  readEntry( DictionaryEntity dictEntity){
                  DictionarylistEntity dictListEntity = new DictionarylistEntity();
                       dictListEntity.setZdid(dictEntity.getId());
-                      dictListEntity.setZddm(dictEntity.getZddm());
-                      dictListEntity.setZdmc(dictEntity.getZdmc());
+                      dictListEntity.setZdywm(dictEntity.getZdywm());
+                      dictListEntity.setZdzwm(dictEntity.getZdzwm());
                       dictListEntity.setZxbz("0");
                List<DictionarylistEntity>  listDict=idictionarylistService.findCtxxByEntity(dictListEntity);
 
@@ -73,12 +73,12 @@ public class DictWorkController {
                    if(dictEntity.getZdlx().equals("1")){//普通字典
                       serviceImplName="DictWorkBaseService";
                    }else{
-                       serviceImplName =dictEntity.getZddm() + "_Service";
+                       serviceImplName =dictEntity.getZdywm() + "_Service";
                    }
 
                try {
 
-                   register.getIdictListWorkService(serviceImplName).getZDXX(listDict,dictEntity.getZddm());
+                   register.getIdictListWorkService(serviceImplName).getZDXX(listDict,dictEntity.getZdywm());
                }catch (Exception e){
                     System.out.println("没有找到对应的生成实现类:"+serviceImplName);
                     e.printStackTrace();

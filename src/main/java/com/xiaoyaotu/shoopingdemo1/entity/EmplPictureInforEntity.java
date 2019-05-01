@@ -1,7 +1,7 @@
 package com.xiaoyaotu.shoopingdemo1.entity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -13,8 +13,8 @@ public class EmplPictureInforEntity {
     private Integer gzxxjlzj;
     private String tplj;
     private String tpmc;
-    private Timestamp tpcjsj;
-    private Timestamp tpxgsj;
+    private Date tpcjsj;
+    private Date tpxgsj;
     private String bz;
 
     @Id
@@ -79,21 +79,21 @@ public class EmplPictureInforEntity {
 
     @Basic
     @Column(name = "TPCJSJ")
-    public Timestamp getTpcjsj() {
+    public Date getTpcjsj() {
         return tpcjsj;
     }
 
-    public void setTpcjsj(Timestamp tpcjsj) {
+    public void setTpcjsj(Date tpcjsj) {
         this.tpcjsj = tpcjsj;
     }
 
     @Basic
     @Column(name = "TPXGSJ")
-    public Timestamp getTpxgsj() {
+    public Date getTpxgsj() {
         return tpxgsj;
     }
 
-    public void setTpxgsj(Timestamp tpxgsj) {
+    public void setTpxgsj(Date tpxgsj) {
         this.tpxgsj = tpxgsj;
     }
 

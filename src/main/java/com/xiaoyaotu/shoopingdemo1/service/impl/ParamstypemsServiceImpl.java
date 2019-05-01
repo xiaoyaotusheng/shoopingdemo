@@ -57,7 +57,7 @@ public class ParamstypemsServiceImpl implements IparamstypemsService {
     @Override
     public List<ParamstypemsEntity> findBySxlb(int sxlb) throws Exception {
         ParamstypemsEntity entity =new ParamstypemsEntity();
-         entity.setSxlb(sxlb);
+         entity.setSxsslx(sxlb);
         return queryByEntity(entity);
     }
 
@@ -80,8 +80,8 @@ public class ParamstypemsServiceImpl implements IparamstypemsService {
             @Override
             public Predicate toPredicate(Root<ParamstypemsEntity> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicates = new ArrayList<>();
-                if( 0!=entity.getSxlb()){
-                    predicates.add(cb.equal(root.get("sxlb"),entity.getSxlb()));
+                if( 0!=entity.getSxsslx()){
+                    predicates.add(cb.equal(root.get("sxlb"),entity.getSxsslx()));
                 }
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));
             }
