@@ -1,41 +1,16 @@
 package com.xiaoyaotu.shoopingdemo1.utils;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import com.google.common.collect.Maps;
 import org.apache.poi.EncryptedDocumentException;
-
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-
-import org.apache.poi.ss.usermodel.BorderStyle;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.Font;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.IndexedColors;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.VerticalAlignment;
-import org.apache.poi.ss.usermodel.Workbook;//接口， 兼容性强 20003,2007都要实现
-import org.apache.poi.ss.usermodel.WorkbookFactory;
-import org.apache.poi.ss.usermodel.CellType;
-
-import org.apache.poi.hssf.usermodel.HSSFWorkbook; //只支持2007以前的老版本，2003
-
-import org.apache.poi.xssf.usermodel.XSSFWorkbook; //只支持2007及其以后版本
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 
 /**
@@ -165,7 +140,7 @@ public class ExcelUtil {
     }
 
     /**
-     * 读取Excel表信息
+     * 读取Sheet表信息
      * @param sheet
      * @return
      */
@@ -226,14 +201,14 @@ public class ExcelUtil {
     }
 
     /**
-     * 创建Excel文件
+     * 创建Excel文件,导出表
      * @param filepath filepath 文件全路径
      * @param sheetName 新Sheet页的名字  表名
      * @param titles 表头           表头第一行显示的中文
      * @param values 每行的单元格   每个单元格的值--需要写入的信息 所有行
      */
     public static boolean writeExcel(String filepath, String sheetName, List<String> titles,
-                                     List<Map<String, Object>> values) throws IOException {
+                                     List<Map<String, Object>> values) throws Exception {
         boolean success = false;
         OutputStream outputStream = null;
         if (StringUtil.isNull(filepath)) {
@@ -322,17 +297,119 @@ public class ExcelUtil {
                 outputStream = new FileOutputStream(filepath);
                 workbook.write(outputStream);
                 success = true;
-            } finally {
+            }catch (Exception e){
+                e.printStackTrace();
+            }finally {
                 if (outputStream != null) {
                     outputStream.close();
                 }
                 if (workbook != null) {
-                   // workbook.close();
+                   workbook.close();
                 }
             }
             return success;
         }
     }
+
+    /**
+     * 创建Excel文件,导出表
+     * @param filepath filepath 文件全路径
+     * @param sheetName 新Sheet页的名字  表名
+     * @param titles 表头           表头第一行显示的中文
+     * @param values 每行的单元格   每个单元格的值--需要写入的信息 所有行
+     */
+    public static Workbook getExcel(String filepath, String sheetName, List<String> titles,
+                                     List<Map<String, Object>> values) throws Exception {
+
+        if (StringUtil.isNull(filepath)) {
+            throw new IllegalArgumentException("文件路径不能为空");
+        } else {
+            String suffiex = getSuffiex(filepath);
+            if (StringUtil.isNull(suffiex)) {
+                throw new IllegalArgumentException("文件后缀不能为空");
+            }
+            Workbook workbook;
+            if ("xls".equals(suffiex.toLowerCase())) {
+                workbook = new HSSFWorkbook();
+            } else {
+                workbook = new XSSFWorkbook();
+            }
+            // 生成一个表格
+            Sheet sheet;
+            if (StringUtil.isNull(sheetName)) {
+                // name 为空则使用默认值
+                sheet = workbook.createSheet();
+            } else {
+                sheet = workbook.createSheet(sheetName);
+            }
+            // 设置表格默认列宽度为15个字节
+            sheet.setDefaultColumnWidth((short) 15);
+            // 生成样式
+            Map<String, CellStyle> styles = createStyles(workbook);
+            // 创建标题行
+            Row row = sheet.createRow(0);
+            // 存储标题在Excel文件中的序号
+            Map<String, Integer> titleOrder = Maps.newHashMap();
+            for (int i = 0; i < titles.size(); i++) {
+                Cell cell = row.createCell(i);
+                cell.setCellStyle(styles.get("header"));
+                String title = titles.get(i);
+                cell.setCellValue(title);
+                titleOrder.put(title, i);
+            }
+            // 写入正文
+            Iterator<Map<String, Object>> iterator = values.iterator(); //转换下
+            // 行号
+            int index = 1; //从第二行开始写入，因为是从0开始计算第一行的
+            while (iterator.hasNext()) {
+                row = sheet.createRow(index); //行号
+                Map<String, Object> value = iterator.next(); //获取一行数据
+                for (Map.Entry<String, Object> map : value.entrySet()) {
+                    // 获取列名
+                    String title = map.getKey();
+                    // 根据列名获取序号
+                    int i = titleOrder.get(title);
+                    // 在指定序号处创建cell
+                    Cell cell = row.createCell(i);
+                    // 设置cell的样式
+                    if (index % 2 == 1) {
+                        cell.setCellStyle(styles.get("cellA"));
+                    } else {
+                        cell.setCellStyle(styles.get("cellB"));
+                    }
+                    // 获取列的值
+                    Object object = map.getValue();//实体类的属性
+                    // 判断object的类型
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    if (object instanceof Double) {
+                        cell.setCellValue((Double) object);
+                    } else if (object instanceof Date) {
+                        String time = simpleDateFormat.format((Date) object);
+                        cell.setCellValue(time);
+                    } else if (object instanceof Calendar) {
+                        Calendar calendar = (Calendar) object;
+                        String time = simpleDateFormat.format(calendar.getTime());
+                        cell.setCellValue(time);
+                    } else if (object instanceof Boolean) {
+                        cell.setCellValue((Boolean) object);
+                    } else if (object instanceof Integer){
+                        cell.setCellValue ((Integer) object);
+                    }else {
+                        if (object != null) {
+                            cell.setCellValue(object.toString());
+                        }
+                    }
+                }
+                index++;
+            }
+
+
+               return  workbook;
+
+        }
+    }
+
+
     /**
      * 设置格式
      */

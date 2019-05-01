@@ -16,7 +16,7 @@ public class DateUtils {
     static SimpleDateFormat sdfday = new SimpleDateFormat("yyyy-MM-dd");
     static SimpleDateFormat sdfday2 = new SimpleDateFormat("yyyy/MM/dd");
    static  SimpleDateFormat sdfday3 =new SimpleDateFormat("yyyyMMdd");
-
+    static  SimpleDateFormat sdfday4 =new SimpleDateFormat("yyyyMMddHHmmssSSS");
 
 
     public static String getStringByDateForAll(Date data){
@@ -72,7 +72,14 @@ public class DateUtils {
         time=  sdfday3.format(data);
         return  time;
     }
-
+    public static String getStringByDateForDay4(Date data){
+        String time=null;
+        if(data==null){
+            return null;
+        }
+        time=  sdfday4.format(data);
+        return  time;
+    }
 
 
 
