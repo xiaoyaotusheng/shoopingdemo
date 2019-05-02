@@ -58,7 +58,7 @@ public class ExcelExportComtroller {
 
 
 
-    @ApiOperation(value = "员工的对应图片信息导出")
+    @ApiOperation(value = "文件地址信息导出")
     @RequestMapping(value = "/findPageByXxgzjlid",method = {RequestMethod.POST, RequestMethod.GET})
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", dataType = "String", name = "hzdm", value = "后缀名代号： 1：xls【2003版到2007版以前】，2：xlsx【2007版及以后】",required = true)
