@@ -1,15 +1,23 @@
 package com.xiaoyaotu.shoopingdemo1.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
 @Table(name = "dictionary", schema = "naogoucms", catalog = "")
 public class DictionaryEntity {
+
+    @ApiModelProperty(value = "ID")
     private int id;
+    @ApiModelProperty(value = "字典名称")
     private String zdzwm;
+    @ApiModelProperty(value = "字典代码")
     private String zdywm;
+    @ApiModelProperty(value = "注销标志")
     private String zxbz;
+    @ApiModelProperty(value = "字典类型")
     private String zdlx;
 
     @Id

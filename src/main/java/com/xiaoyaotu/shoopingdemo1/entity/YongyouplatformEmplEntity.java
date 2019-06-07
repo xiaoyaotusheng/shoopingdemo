@@ -1,5 +1,8 @@
 package com.xiaoyaotu.shoopingdemo1.entity;
 
+import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.JoinFormula;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Objects;
@@ -7,25 +10,45 @@ import java.util.Objects;
 @Entity
 @Table(name = "yongyouplatform_empl", schema = "naogoucms", catalog = "")
 public class YongyouplatformEmplEntity {
+    @ApiModelProperty(value = "主键")
     private int id;
+@ApiModelProperty(value = "学位")
     private String xw;
+@ApiModelProperty(value = "年龄")
     private String nl;
+@ApiModelProperty(value = "曾用名")
     private String cym;
+@ApiModelProperty(value = "出生日期")
     private Date csrq;
+@ApiModelProperty(value = "出生省份和地区")
     private String cssfhdq;
+@ApiModelProperty(value = "学历")
     private String xl;
+@ApiModelProperty(value = "家庭地址")
     private String jddz;
+@ApiModelProperty(value = "个人身份")
     private String grsf;
+@ApiModelProperty(value = "毕业专业")
     private String byzy;
+@ApiModelProperty(value = "婚烟状况")
     private String hyzk;
+@ApiModelProperty(value = "联系电话")
     private String lxdh;
+@ApiModelProperty(value = "姓名")
     private String xm;
+@ApiModelProperty(value = "民族")
     private String mz;
+@ApiModelProperty(value = "籍贯")
     private String jg;
+@ApiModelProperty(value = "参加工作日期")
     private Date cjgzsj;
+@ApiModelProperty(value = "性别")
     private String xb;
+@ApiModelProperty(value = "更新时间")
     private Date gxsj;
+@ApiModelProperty(value = "true")
     private Date tjsj;
+
 
     @Id
     @Column(name = "ID")
