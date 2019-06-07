@@ -1,5 +1,6 @@
 package com.xiaoyaotu.shoopingdemo1.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.JoinFormula;
 
@@ -19,6 +20,7 @@ public class YongyouplatformEmplEntity {
 @ApiModelProperty(value = "曾用名")
     private String cym;
 @ApiModelProperty(value = "出生日期")
+@JsonFormat(pattern = "yyyy-MM-dd")
     private Date csrq;
 @ApiModelProperty(value = "出生省份和地区")
     private String cssfhdq;
@@ -41,12 +43,15 @@ public class YongyouplatformEmplEntity {
 @ApiModelProperty(value = "籍贯")
     private String jg;
 @ApiModelProperty(value = "参加工作日期")
+@JsonFormat(pattern = "yyyy-MM-dd")
     private Date cjgzsj;
 @ApiModelProperty(value = "性别")
     private String xb;
 @ApiModelProperty(value = "更新时间")
+@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date gxsj;
-@ApiModelProperty(value = "true")
+@ApiModelProperty(value = "填表时间")
+@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date tjsj;
 
 
