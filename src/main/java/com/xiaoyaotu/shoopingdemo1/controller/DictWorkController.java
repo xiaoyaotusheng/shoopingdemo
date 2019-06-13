@@ -4,7 +4,6 @@ package com.xiaoyaotu.shoopingdemo1.controller;
 import com.xiaoyaotu.shoopingdemo1.common.ApiResult;
 import com.xiaoyaotu.shoopingdemo1.entity.DictionaryEntity;
 import com.xiaoyaotu.shoopingdemo1.entity.DictionarylistEntity;
-import com.xiaoyaotu.shoopingdemo1.service.DictWorkFactory;
 import com.xiaoyaotu.shoopingdemo1.service.IdictionaryService;
 import com.xiaoyaotu.shoopingdemo1.service.IdictionarylistService;
 import io.swagger.annotations.Api;
@@ -29,8 +28,7 @@ public class DictWorkController {
 
      @Resource
      private IdictionarylistService idictionarylistService;
-     @Resource(name = "register")
-      private DictWorkFactory register; //工厂类
+
 
      @ApiOperation("点击生成字典信息")
      @RequestMapping(name = "/greatDicts",method ={RequestMethod.GET, RequestMethod.POST})
@@ -69,20 +67,9 @@ public class DictWorkController {
                       dictListEntity.setZxbz("0");
                List<DictionarylistEntity>  listDict=idictionarylistService.findCtxxByEntity(dictListEntity);
 
-                  String serviceImplName=null;
-                   if(dictEntity.getZdlx().equals("1")){//普通字典
-                      serviceImplName="DictWorkBaseService";
-                   }else{
-                       serviceImplName =dictEntity.getZdywm() + "_Service";
-                   }
 
-               try {
 
-                   register.getIdictListWorkService(serviceImplName).getZDXX(listDict,dictEntity.getZdywm());
-               }catch (Exception e){
-                    System.out.println("没有找到对应的生成实现类:"+serviceImplName);
-                    e.printStackTrace();
-               }
+
 
     }
 
